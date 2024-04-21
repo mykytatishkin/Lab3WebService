@@ -8,6 +8,7 @@ namespace Lab3WebService.Models
         public string Name { get; set; }
         public string Password { get; set; }
         public string Role { get; set; }
+        [ForeignKey("Shops")]
         public string ShopId { get; set; }
 
     }
