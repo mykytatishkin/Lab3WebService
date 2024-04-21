@@ -10,6 +10,6 @@ namespace Lab3WebService.Models
         public string Email { get; set; }
         public string Phone { get; set; }
         [ForeignKey("Users")]
-        public string UserId { get; set; }
+        public int UserId { get; set; }
     }
 }

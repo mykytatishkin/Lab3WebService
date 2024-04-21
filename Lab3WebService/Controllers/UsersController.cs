@@ -50,13 +50,20 @@ namespace Lab3WebService.Controllers
         }
 
         // POST: Users/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name,Password,Role,ShopId")] Users users)
         {
             if (ModelState.IsValid)
             {
+                // Check if the associated shop exists
+                var shopExists = await _context.Shops.AnyAsync(s => s.Id == users.ShopId);
+                if (!shopExists)
+                {
+                    ModelState.AddModelError("ShopId", "Shop with the specified Id does not exist.");
+                    return View(users);
+                }
+
                 _context.Add(users);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -81,7 +88,6 @@ namespace Lab3WebService.Controllers
         }
 
         // POST: Users/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Password,Role,ShopId")] Users users)

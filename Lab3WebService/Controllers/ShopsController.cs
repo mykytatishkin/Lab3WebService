@@ -50,7 +50,6 @@ namespace Lab3WebService.Controllers
         }
 
         // POST: Shops/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name,Address,Email")] Shops shops)
@@ -81,7 +80,6 @@ namespace Lab3WebService.Controllers
         }
 
         // POST: Shops/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Address,Email")] Shops shops)
